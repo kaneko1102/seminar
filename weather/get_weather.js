@@ -8,14 +8,10 @@ var re_title = RegExp("(?<=<title>).*?(?=</title>)")
 function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
     var item = re_item.exec(body);
-    if(!item){
-      console.log("No title")
-    }else{
 	  var weather = re_title.exec(item[0]);
 	  console.log(weather[0]);
-	  
-    }
-  }else{
+  }
+  else{
     console.log("Error!");
   }
 }
