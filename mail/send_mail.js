@@ -1,7 +1,7 @@
 const send = require('gmail-send')({
-  user: '',
-  pass: '',
-  to:   '',
+  user: process.argv[3],
+  pass: process.argv[4],
+  to:   process.argv[2],
   subject: 'テスト',
 });
 
