@@ -6,20 +6,26 @@ var re_item = RegExp("(?<=<item>).*?(?=</item>)")
 var re_title = RegExp("(?<=<title>).*?(?=</title>)")
 
 
-const send = require('gmail-send')({
-    user: process.argv[3],
-    pass: process.argv[4],
-    to:   process.argv[2],
-    subject: 'テスト',
-  });
-  
-  send({
-    text:    'テスト \n テストメール\n',  
-  }, (error, result, fullResult) => {
-    if (error) console.error(error);
-    console.log(result);
-  })
-  
+function send_mail(user,pass,to,subject,text){
+    const send = require('gmail-send')({
+      user: user,
+      pass: pass,
+      to:   to,
+      subject: subject,
+    });
+    
+    send({
+      text:    text,  
+    }, (error, result, fullResult) => {
+      if (error) console.error(error);
+      console.log(result);
+    })
+}
+    
+    //let subject = 'テスト'
+    //let text='テストメール\nこれはテストです。'
+    //send_mail(process.argv[3],process.argv[4],process.argv[2],subject,text);
+    
 
 function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
