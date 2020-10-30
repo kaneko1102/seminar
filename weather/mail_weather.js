@@ -28,14 +28,19 @@ function send_mail(user,pass,to,subject,text){
     
 
 function callback(error, response, body) {
+  var text;
   if (!error && response.statusCode == 200) {
     var item = re_item.exec(body);
 	  var weather = re_title.exec(item[0]);
-	  console.log(weather[0]);
+    //console.log(weather[0]);
+    text = weather[0];
   }
   else{
-    console.log("Error!");
+    //console.log("Error!");
+    text = "Error!";
   }
+  console.log(text);
+  send_mail(user,pass,to,subject,text);
 }
 
 request(URL, callback);
