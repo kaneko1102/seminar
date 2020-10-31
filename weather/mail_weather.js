@@ -1,5 +1,6 @@
 var request = require('request');
 
+//東京の天気を取得
 var URL = 'https://rss-weather.yahoo.co.jp/rss/days/4410.xml';
 
 var re_item = RegExp("(?<=<item>).*?(?=</item>)")
@@ -29,8 +30,9 @@ function send_mail(user,pass,to,subject,text){
 function callback(error, response, body) {
   var text;
   if (!error && response.statusCode == 200) {
+    //<item>タグの中の<title>タグにある天気の情報を取得
     var item = re_item.exec(body);
-	  var weather = re_title.exec(item[0]);
+    var weather = re_title.exec(item[0]);
     text = weather[0];
   }
   else{
