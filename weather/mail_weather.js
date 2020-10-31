@@ -34,12 +34,12 @@ function callback(error, response, body) {
     var item = re_item.exec(body);
     var weather = re_title.exec(item[0]);
     text = weather[0];
+    console.log(text);
+    send_mail(user,pass,to,subject,text);
   }
   else{
-    text = "Error!";
+    console.log("Error!")
   }
-  console.log(text);
-  send_mail(user,pass,to,subject,text);
 }
 
 request(URL, callback);
