@@ -5,6 +5,10 @@ var URL = 'https://rss-weather.yahoo.co.jp/rss/days/4410.xml';
 var re_item = RegExp("(?<=<item>).*?(?=</item>)")
 var re_title = RegExp("(?<=<title>).*?(?=</title>)")
 
+var user = process.argv[3]
+var pass = process.argv[4]
+var to = process.argv[2]
+var subject = "Weather"
 
 function send_mail(user,pass,to,subject,text){
     const send = require('gmail-send')({
@@ -21,25 +25,19 @@ function send_mail(user,pass,to,subject,text){
       console.log(result);
     })
 }
-    
-    //let subject = 'テスト'
-    //let text='テストメール\nこれはテストです。'
-    //send_mail(process.argv[3],process.argv[4],process.argv[2],subject,text);
-    
 
 function callback(error, response, body) {
+  var text;
   if (!error && response.statusCode == 200) {
     var item = re_item.exec(body);
-    if(!item){
-      console.log("No title")
-    }else{
 	  var weather = re_title.exec(item[0]);
-	  console.log(weather[0]);
-	  
-    }
-  }else{
-    console.log("Error!");
+    text = weather[0];
   }
+  else{
+    text = "Error!";
+  }
+  console.log(text);
+  send_mail(user,pass,to,subject,text);
 }
 
 request(URL, callback);
