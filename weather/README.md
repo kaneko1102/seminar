@@ -19,6 +19,11 @@ npm install --save gmail-send
 ```
 node mail_weather.js 宛先アドレス 送信元Gメールアドレス Googleアカウントのパスワード
 ```
+## シェルスクリプト
+シェルスクリプトを用意しているため，コマンドラインに次のように入力して実行し，メールアドレスとパスワードを入力することでも実行できる
+```
+bash mail_weather.sh
+```
 
 # 参考
 [HTMLのタイトルを取得する[Node.js,シェルスクリプト]](https://qiita.com/oha-yashi/items/e62711ae74b17a665a5d)
